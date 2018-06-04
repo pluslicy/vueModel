@@ -1,0 +1,143 @@
+ul , ol, dl {
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+/*为模态框title底部添加边框线*/
+.el-dialog__header {
+	color:red;
+	font-size:32px;
+	padding: 0 15px ;
+	background-color: #ebeef5;
+}
+.el-dialog__body {
+    padding: 10px 20px;
+}
+/*减小表单项之间的间距*/
+.el-form-item ,.el-form-item--small.el-form-item{
+    margin-bottom: .5em;
+}
+
+
+h1,h2,h3,h4,h5,h6,p{
+	margin: 0;
+	padding: 0;
+}
+.el-table--mini td, .el-table--mini th {
+    padding: 0;
+}
+table.el-table__header th{
+	background-color: #ebeef5;
+	text-align: center;
+	line-height: 2.5em;
+}
+.el-table .cell {
+	line-height: 40px;
+	height: 40px;
+}
+
+
+/*左侧导航*/
+.el-submenu__title {
+	height:3em;
+	line-height: 3em;
+	border-bottom:1px solid #2f7865;
+}
+li.el-menu-item {
+	border-bottom: 1px solid #2f7865;
+	background-color: #4c8c7c;
+}
+li.el-menu-item > i.fa {
+	line-height: 3em;
+	height: 3em;
+}
+li.el-menu-item:hover,li.el-menu-item:focus,li.el-menu-item.is-active {
+    color: #ffffff;
+    background-color: #2f7865;
+}
+.app_left_bottom .el-submenu__title ,
+.app_left_bottom .el-submenu__title i,
+.el-menu-item,
+.el-menu-item i{
+	color:#fff;
+}
+
+/*选项卡*/
+.el-tabs__header {
+    padding: 0;
+    position: relative;
+    margin: 0 0 .5em;
+}
+.el-tabs__item {
+	height:2.5em;
+	line-height: 2.5em;
+}
+
+
+/*全局自定义设定*/
+.content-right {
+	text-align: right;
+}
+.content-left {
+	text-align: left;
+}
+
+/*复选框间距*/
+.el-checkbox + .el-checkbox {
+    margin-left: 1em;
+}
+
+/*上传按钮*/
+.el-upload__input {
+    display: none !important;
+}
+
+
+/*表格*/
+.el-table__header {
+    border-collapse: separate;
+}
+
+.el-form-item__label {
+	/*font-weight:normal;*/
+	font-size: 12px;
+}
+
+.el-tabs__item:focus.is-active.is-focus:not(:active){
+	box-shadow: none;;
+}
+
+.el-tabs__nav-wrap::after{
+	height: 1px;
+}
+
+.topBtns {
+	margin-bottom: 0.5em;
+}
+.pageLine {
+	text-align: right;
+}
+
+
+i{
+	cursor: pointer;
+}
+
+h3{
+		background-color: #ccc;
+		height: 40px;
+		line-height: 40px;
+		padding-left: 20px;
+		margin-bottom:-2px;
+		font-size: 18px;
+		margin-top: 10px
+	}
+
+
+
+
+
+
+
+
+
