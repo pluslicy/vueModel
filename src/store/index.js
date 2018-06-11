@@ -2,11 +2,11 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 Vue.use(Vuex);
 
-//云实验室模块
-import CourseStore from './modules/labStore/courseStore'
+//年级相关状态
+import GradeStore from './modules/base/gradeStore'
 
 export default new Vuex.Store({
 	modules:{
-		CourseStore
+		GradeStore
 	}
 });

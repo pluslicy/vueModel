@@ -6,13 +6,14 @@
 			</el-col>
 			<el-col :span='12' class='content-right'>
 				<el-button @click='toAddGrade'>添加</el-button>
-				<el-button>批量删除</el-button>
+				<el-button @click="toBatchDelete">批量删除</el-button>
 			</el-col>
 		</el-row>
 
 		<el-row>
 			<el-col :span='24'>
 				<el-table
+					v-loading='gradeTblLoading'
 					size='mini'
 					border
 			    ref="multipleTable"
@@ -75,9 +76,12 @@
 	</div>
 </template>
 <script>
+	import {mapGetters,mapActions} from 'vuex';
 	export default {
 		data(){
 			return {
+				gradeTblLoading:false,
+				selectedGrades:[],	//复选的年级信息
 				// 仅维护年级模态框中相关数据
 				gradeDialog:{
 					visible:false,		//可见性
@@ -94,41 +98,53 @@
 				}
 			}
 		},
+		created(){
+			this.loadGradeList();
+		},
 		computed:{
-			getGradeList(){
-				return [{
-					id:1001,
-					name:'webui',
-					description:'前端开发'
-				},{
-					id:1002,
-					name:'javaee',
-					description:'服务器端开发'
-				}];
-			}
+			...mapGetters(['getGradeList'])
 		},
 		methods:{
+
+			...mapActions(['findAllGrade','saveOrUpdateGrade','deleteGradeById','batchDeleteGrade']),
+			// 加载年级数据
+			loadGradeList(){
+				// 查询所有年级信息
+				this.gradeTblLoading = true;
+				this.findAllGrade().catch((error)=>{
+					this.$notify({title: '失败', message: '数据异常:'+error.message, type: 'error'});
+				}).finally(()=>{
+					this.gradeTblLoading = false;
+				});
+			},
+
 			// 去添加年级数据
 			toAddGrade(){
 				//1. 弹出模态框
 				this.gradeDialog.title = '添加年级';
 				this.gradeDialog.visible = true;
-			
 				//2. 初始化或者是重置模态框中的默认值
+				this.gradeDialog.form.id = '';
+				this.gradeDialog.form.name ='';
+				this.gradeDialog.form.description ='';
 			},
 			// 提交年级表单
 			submitGradeForm(){
-				
 				//0. 数据校验
 				this.$refs['gradeDialogForm'].validate((valid)=>{
 					if(valid){
 						//1. 向后台发送数据
 						let grade = this.gradeDialog.form;
-						console.log('submit',grade);
-						//2. 当添加成功，提示用户，然后关闭模态框
-						//3. 当添加失败，提示用户，不关闭模态框
-						this.$refs['gradeDialogForm'].resetFields();
-						this.gradeDialog.visible = false;
+						this.saveOrUpdateGrade(grade).then(()=>{
+							//2. 当添加成功，提示用户，然后关闭模态框
+							this.$notify({title: '成功', message: '年级信息保存成功', type: 'success'});
+							this.loadGradeList();
+							this.$refs['gradeDialogForm'].resetFields();
+							this.gradeDialog.visible = false;
+						}).catch(()=>{
+							//3. 当添加失败，提示用户，不关闭模态框
+							this.$notify({title: '失败', message: '年级信息保存失败', type: 'error'});
+						});
 					} 
 				});
 				
@@ -141,12 +157,51 @@
 				this.gradeDialog.form = row;
 				console.log('edit',JSON.stringify(row));
 			},
+			//去批量删除
+			toBatchDelete(){
+				if(this.selectedGrades && this.selectedGrades.length>0){
+					//1, 询问用户是否删除
+					this.$confirm('此操作将永久删除这些数据, 是否继续?', '提示', {
+	          confirmButtonText: '确定',
+	          cancelButtonText: '取消',
+	          type: 'warning'
+	        }).then(() => {
+	        	//2. 获取要删除的id
+	        	let ids  = this.selectedGrades.map((item)=>{
+	        		return item.id;
+	        	})
+	        	// 3. 调用接口进行删除
+	        	this.batchDeleteGrade(ids.join()).then(()=>{
+          		this.$notify({type: 'success', message: '删除成功!'});
+
+	        		this.loadGradeList();
+	        	});
+	        })
+        } else {
+          this.$notify({type: 'warning', message: '请选选中要删除的数据!'});
+
+        }
+			},
 			// 去删除年级数据
 			toDeleteGrade(row){
-				console.log('delete',JSON.stringify(row));
+				//1, 询问用户是否删除
+				this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+        	// 2. 确定删除，调用store中的函数，删除
+        	this.deleteGradeById(row.id).then(()=>{
+          	this.$notify({type: 'success', message: '删除成功!'});
+          	//3. 刷新列表
+          	this.loadGradeList();
+        	}).catch(()=>{
+          	this.$notify({type: 'error', message: '删除失败!'});
+        	});
+        })
 			},
 			handleSelectionChange(val) {
-        this.multipleSelection = val;
+        this.selectedGrades = val;
       },
 
       handleGradeDialogClose(done){
