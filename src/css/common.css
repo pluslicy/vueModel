@@ -15,7 +15,7 @@ ul , ol, dl {
 }
 /*减小表单项之间的间距*/
 .el-form-item ,.el-form-item--small.el-form-item{
-    margin-bottom: .5em;
+    /*margin-bottom: .5em;*/
 }
 
 

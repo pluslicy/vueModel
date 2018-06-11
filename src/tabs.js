@@ -1,6 +1,6 @@
 export default [{
 	id:1,
-	name:'基础数据',
+	name:'基础数据...',
 	icon:'fa-desktop',
 	path:'/app/base',
 	children:[{
@@ -20,7 +20,7 @@ export default [{
 		path:'course',
 		name:'课程管理'
 	},{
-		id:14,
+		id:15,
 		path:'teacher',
 		name:'教师管理'
 	}]

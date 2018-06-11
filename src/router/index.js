@@ -1,15 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import login from '@/pages/login'  //登录页
-import index from '@/pages/index'
+import login from '@/pages/login' //登录页
+import index from '@/pages/index' //首页
 
-//实验室管理
+// 基础数据模块
 import Base from '@/pages/base'
 import BaseSchool from '@/pages/base/school'
-
+import BaseGrade from '@/pages/base/grade'
+import BaseClazz from '@/pages/base/clazz'
+import BaseCourse from '@/pages/base/course'
+import BaseTeacher from '@/pages/base/teacher'
+// 问卷管理模块
 import Questionnaire from '@/pages/questionnaire'
 
+// 课调管理模块
 import Survey from '@/pages/survey'
 
 import Statistics from '@/pages/statistics'
@@ -36,12 +41,30 @@ export default new Router({
         path: 'school',
         name: 'BaseSchool',
         component: BaseSchool
+      },{
+        path: 'grade',
+        name: 'BaseGrade',
+        component: BaseGrade
+      },{
+        path: 'clazz',
+        name: 'BaseClazz',
+        component: BaseClazz
+      },{
+        path: 'course',
+        name: 'BaseCourse',
+        component: BaseCourse
+      },{
+        path: 'teacher',
+        name: 'BaseTeacher',
+        component: BaseTeacher
       }]
     },{
+      // 问卷管理模块
       path: 'questionnaire',
       name: 'Questionnaire',
       component: Questionnaire,
     },{
+      // 课调管理模块
       path: 'survey',
       name: 'Survey',
       component: Survey,
