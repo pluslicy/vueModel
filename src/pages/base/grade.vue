@@ -2,11 +2,11 @@
 	<div class="grade">
 		<el-row class='topBtns'>
 			<el-col :span='12'>
-				<el-input style='width:220px'></el-input>
+				<el-input style='width:220px' size='small'></el-input>
 			</el-col>
 			<el-col :span='12' class='content-right'>
-				<el-button @click='toAddGrade'>添加</el-button>
-				<el-button @click="toBatchDelete">批量删除</el-button>
+				<el-button @click='toAddGrade' size="small">添加</el-button>
+				<el-button @click="toBatchDelete" size="small">批量删除</el-button>
 			</el-col>
 		</el-row>
 
@@ -21,23 +21,10 @@
 			    tooltip-effect="dark"
 			    style="width: 100%"
 			    @selection-change="handleSelectionChange">
-			    <el-table-column
-			    	align='center'
-			      type="selection"
-			      width="55">
-			    </el-table-column>
-			    <el-table-column
-			    	prop="name"
-			      label="名称">
-			    </el-table-column>
-			    <el-table-column
-			      prop="description"
-			      label="简介">
-			    </el-table-column>
-			    <el-table-column
-			    	width='120'
-			    	align='center'
-			      label="操作">
+			    <el-table-column align='center' type="selection" width="55"></el-table-column>
+			    <el-table-column prop="name" label="名称"></el-table-column>
+			    <el-table-column prop="description" label="简介"></el-table-column>
+			    <el-table-column width='120' align='center' label="操作">
 			      <template slot-scope='scope'>
 			      	<el-button type='text' @click='toEditGrade(scope.row)'>修改</el-button>
 			      	<el-button type='text' @click='toDeleteGrade(scope.row)'>删除</el-button>
@@ -52,7 +39,6 @@
 		  :title="gradeDialog.title"
 		  :visible.sync="gradeDialog.visible"
 		  :before-close="handleGradeDialogClose">
-		  {{gradeDialog.form}}
 			<el-form 
 				ref='gradeDialogForm'
 				:rules='gradeDialog.rules'
@@ -66,11 +52,9 @@
 					<el-input type='textarea' v-model='gradeDialog.form.description'></el-input>
 				</el-form-item>	
 			</el-form>
-
-
 		  <span slot="footer" class="dialog-footer">
-		    <el-button @click="gradeDialog.visible = false">取 消</el-button>
-		    <el-button type="primary" @click="submitGradeForm">确 定</el-button>
+		    <el-button @click="gradeDialog.visible = false" size="small">取 消</el-button>
+		    <el-button type="primary" @click="submitGradeForm" size="small">确 定</el-button>
 		  </span>
 		</el-dialog>
 	</div>
