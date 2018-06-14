@@ -108,8 +108,8 @@ export default {
       //设置二级选项卡默认值
       this.tabs.activePage = this.tabs.pages[0].path;
       //页面跳转
-      // this.$router.push(this.tabs.defaultMenu.path+'/'+this.tabs.activePage);
-      this.$router.push(this.tabs.defaultMenu.path);
+      this.$router.push(this.tabs.defaultMenu.path+'/'+this.tabs.activePage);
+      // this.$router.push(this.tabs.defaultMenu.path);
     },
     // 点击二级菜单操作
     handleTabClick(tab,event){
