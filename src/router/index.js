@@ -14,6 +14,7 @@ import BaseTeacher from '@/pages/base/teacher'
 // 问卷管理模块
 import Questionnaire from '@/pages/questionnaire'
 import QuestionnaireQuestion from '@/pages/questionnaire/question'
+import QuestionnaireList from '@/pages/questionnaire/list'
 
 // 课调管理模块
 import Survey from '@/pages/survey'
@@ -68,6 +69,10 @@ export default new Router({
         path:'question',
         name:'QuestionnaireQuestion',
         component:QuestionnaireQuestion
+      },{
+        path:'list',
+        name:'QuestionnaireList',
+        component:QuestionnaireList
       }]
     },{
       // 课调管理模块

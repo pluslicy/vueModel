@@ -1,6 +1,6 @@
 export default [{
 	id:1,
-	name:'基础数据...',
+	name:'基础数据',
 	icon:'fa-desktop',
 	path:'/app/base',
 	children:[{

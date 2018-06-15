@@ -47,6 +47,7 @@
 		<el-dialog 
 			:title="questionDialog.title" 
 			width='800px'
+			@close='closeQuestionDialog'
 			:visible.sync="questionDialog.visible">
 			<div style="display:none">
 				表单：{{questionDialog.form}} <br>
@@ -137,7 +138,7 @@
 		  </el-form>
 
 		  <div slot="footer" class="dialog-footer">
-		    <el-button size="small" @click="questionDialog.visible = false">取 消</el-button>
+		    <el-button size="small" @click="closeQuestionDialog">取 消</el-button>
 		    <el-button size="small" type="primary" @click="submitQuestionForm">确 定</el-button>
 		  </div>
 		</el-dialog>
@@ -159,7 +160,10 @@
 				// 模态框相关的数据
 				questionDialog:{
 					title:'',
-					form:{},
+					form:{
+						id:'',
+						title:''
+					},
 					visible:false,
 					options:[],
 					rules:{
@@ -234,6 +238,23 @@
 				'deleteQuestionById',
 				'batchDeleteQuestions'
 			]),
+			// 关闭模态框
+			closeQuestionDialog(){
+				// 0.重置校验状态
+				this.$refs['questionForm'].resetFields();
+				// 1. 重置表单内容
+				this.resetQuestionForm();
+				// 2. 关闭模态框
+				this.questionDialog.visible = false;
+			},
+			resetQuestionForm(){
+				// 4.1 重置表单
+				this.questionDialog.form.id = '';
+				this.questionDialog.form.title = '';
+				this.questionDialog.form.course_id = '';
+				this.questionDialog.form.questionType = null;
+				this.questionDialog.options =[];
+			},
 			// 去批量删除问题
 			toBatchDeleteQuestion(){
 				this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
@@ -274,6 +295,7 @@
 			toEditQuestion(question){
 				//1. 处理数据  question --> form,options
 				//1.1 题目
+				this.questionDialog.title = '修改题目';
 				this.questionDialog.form.id = question.id;
 				this.questionDialog.form.title = question.title;
 				this.questionDialog.form.course_id = question.course?question.course.id:'';
@@ -313,13 +335,11 @@
 							};
 							//4. 提交表单， 如果成功，重置表单，关闭模态框，刷新数据
 							this.saveOrUpdateQuestion(question).then((result)=>{
-								// 4.1 重置表单
-								this.$refs['questionForm'].resetFields();
-								this.questionDialog.options =[];
+
 								// 4.2 成功提示
 								this.$notify({type:'success',message:result.message})
 								// 4.3 关闭模态框
-								this.questionDialog.visible = false;
+								this.closeQuestionDialog();
 								// 4.4 刷新数据
 								this.loadQuestionList();
 							}).catch((error)=>{
