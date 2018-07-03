@@ -17,7 +17,7 @@
 		    <el-input size="small" type="textarea" v-model="form.description"></el-input>
 		  </el-form-item>
 		  <el-form-item class="content-right">
-		    <el-button type="primary" @click="submitSchoolForm">保存</el-button>
+		    <el-button type="primary" size="small" @click="submitSchoolForm">保存</el-button>
 		  </el-form-item>
 		</el-form>
 	</div>

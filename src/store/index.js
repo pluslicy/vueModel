@@ -10,12 +10,14 @@ import CourseStore from './modules/base/courseStore'
 
 // 题库管理相关状态
 import QuestionStore from './modules/questionnaire/questionStore'
+import ListStore from './modules/questionnaire/listStore'
 
 export default new Vuex.Store({
 	modules:{
 		GradeStore,
 		SchoolStore,
 		QuestionStore,
-		CourseStore
+		CourseStore,
+		ListStore
 	}
 });

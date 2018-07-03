@@ -1,3 +1,6 @@
+body {
+	font-size: 12px;
+}
 ul , ol, dl {
 	margin:0;
 	padding:0;
@@ -12,6 +15,7 @@ ul , ol, dl {
 }
 .el-dialog__body {
     padding: 10px 20px;
+    font-size: 12px;
 }
 /*减小表单项之间的间距*/
 .el-form-item ,.el-form-item--small.el-form-item{
@@ -83,8 +87,15 @@ li.el-menu-item:hover,li.el-menu-item:focus,li.el-menu-item.is-active {
 }
 
 /*复选框间距*/
+.el-checkbox {
+    margin-left: 1em;
+}
 .el-checkbox + .el-checkbox {
     margin-left: 1em;
+}
+.el-checkbox__label{
+	font-weight: normal;
+	font-size: 12px;
 }
 
 /*上传按钮*/
